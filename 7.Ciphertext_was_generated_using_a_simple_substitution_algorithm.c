@@ -1,11 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 
-// Function to decrypt a character using a simple substitution algorithm
 char decryptChar(char c) {
     if (isalpha(c)) {
         char base = isupper(c) ? 'A' : 'a';
-        // Assuming 'e' is the most frequently occurring letter in English
         return (char)((c - base + 26 - ('E' - 'A')) % 26 + base);
     } else {
         return c;
