@@ -1,7 +1,5 @@
 #include <stdio.h>
 
-// Function to calculate the modular multiplicative inverse of a number
-// (required for finding the decryption key)
 int modInverse(int a, int m) {
     int m0 = m, t, q;
     int x0 = 0, x1 = 1;
@@ -9,7 +7,6 @@ int modInverse(int a, int m) {
     if (m == 1)
         return 0;
 
-    // Apply extended Euclidean Algorithm
     while (a > 1) {
         q = a / m;
         t = m;
@@ -20,18 +17,14 @@ int modInverse(int a, int m) {
         x1 = t;
     }
 
-    // Make x1 positive
     if (x1 < 0)
         x1 += m0;
 
     return x1;
 }
-
-// Function to decrypt a character using the affine cipher
 char decryptChar(int a, int b, char c) {
     if (isalpha(c)) {
         char base = isupper(c) ? 'A' : 'a';
-        // Apply the decryption formula
         return (char)((modInverse(a, 26) * (c - base - b + 26)) % 26 + base);
     } else {
         return c;
@@ -41,22 +34,18 @@ char decryptChar(int a, int b, char c) {
 int main() {
     char ciphertext[] = "BXUBBUUUBBUUUBBUXBUUUBBXU";
     
-    // Known mappings from the most frequent and second most frequent letters
     char mostFrequent = 'B';
     char secondMostFrequent = 'U';
 
     int a, b;
 
-    // Calculate a and b based on the known mappings
     a = (secondMostFrequent - mostFrequent + 26) % 26;
     b = (mostFrequent - 'A') % 26;
 
-    // Decrypt the ciphertext
     for (int i = 0; ciphertext[i] != '\0'; ++i) {
         ciphertext[i] = decryptChar(a, b, ciphertext[i]);
     }
 
-    // Print the decrypted message
     printf("Decrypted message: %s\n", ciphertext);
 
     return 0;
