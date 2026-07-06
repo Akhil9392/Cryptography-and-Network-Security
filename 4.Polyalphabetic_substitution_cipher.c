@@ -2,7 +2,6 @@
 #include <ctype.h>
 #include <string.h>
 
-// Function to perform polyalphabetic substitution cipher encryption
 void polyalphabeticCipher(char message[], char key[]) {
     int keyLength = strlen(key);
     int messageLength = strlen(message);
@@ -12,7 +11,6 @@ void polyalphabeticCipher(char message[], char key[]) {
             char base = isupper(message[i]) ? 'A' : 'a';
             int keyIndex = i % keyLength;
 
-            // Apply substitution cipher using the current key letter
             char encryptedChar = (char)(((message[i] - base + key[keyIndex] - 'A') % 26) + base);
 
             message[i] = encryptedChar;
@@ -24,22 +22,17 @@ int main() {
     char message[100];
     char key[100];
 
-    // Input the message to be encrypted
     printf("Enter a message: ");
     fgets(message, sizeof(message), stdin);
 
-    // Input the key
     printf("Enter the key (a word or phrase): ");
     fgets(key, sizeof(key), stdin);
 
-    // Remove newline characters from the inputs
     strtok(message, "\n");
     strtok(key, "\n");
-
-    // Perform polyalphabetic substitution cipher encryption
+    
     polyalphabeticCipher(message, key);
 
-    // Print the encrypted message
     printf("Encrypted message: %s\n", message);
 
     return 0;
