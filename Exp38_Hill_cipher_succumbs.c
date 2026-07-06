@@ -16,7 +16,6 @@ void hillEncrypt(char *message, int key[2][2]) {
         int encryptedLetter1 = (key[0][0] * letter1 + key[0][1] * letter2) % 26;
         int encryptedLetter2 = (key[1][0] * letter1 + key[1][1] * letter2) % 26;
 
-        // Convert the encrypted letters back to characters
         encryptedMessage[i] = encryptedLetter1 + 'a';
         encryptedMessage[i + 1] = encryptedLetter2 + 'a';
     }
