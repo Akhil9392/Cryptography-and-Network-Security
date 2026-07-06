@@ -1,6 +1,5 @@
 #include <stdio.h>
 
-// Function to calculate the greatest common divisor (GCD)
 int gcd(int a, int b) {
     if (b == 0) {
         return a;
@@ -9,12 +8,10 @@ int gcd(int a, int b) {
     }
 }
 
-// Function to check if two numbers are coprime
 int areCoprime(int a, int b) {
     return gcd(a, b) == 1;
 }
 
-// Function to encrypt a character using the affine Caesar cipher
 char encryptChar(int a, int b, char p) {
     if (isalpha(p)) {
         char base = isupper(p) ? 'A' : 'a';
@@ -27,26 +24,22 @@ char encryptChar(int a, int b, char p) {
 int main() {
     int a, b;
 
-    // Input values for a and b
     printf("Enter the value for 'a': ");
     scanf("%d", &a);
 
     printf("Enter the value for 'b': ");
     scanf("%d", &b);
 
-    // Check if b is relatively prime to 26
     if (!areCoprime(b, 26)) {
         printf("Error: 'b' must be relatively prime to 26.\n");
         return 1;
     }
 
-    // Check if a is allowed (i.e., a and 26 are coprime)
     if (!areCoprime(a, 26)) {
         printf("Error: 'a' must be chosen such that it is coprime to 26.\n");
         return 1;
     }
 
-    // Perform encryption
     char plaintext[] = "HelloWorld";
     char ciphertext[50];
 
@@ -56,7 +49,6 @@ int main() {
 
     ciphertext[strlen(plaintext)] = '\0';
 
-    // Print the encrypted message
     printf("Encrypted message: %s\n", ciphertext);
 
     return 0;
