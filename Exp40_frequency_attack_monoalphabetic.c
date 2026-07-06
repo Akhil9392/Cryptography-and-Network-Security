@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-// Function to calculate the frequency of each letter in the ciphertext
 void calculateFrequency(char *ciphertext, int *frequency) {
     int i = 0;
     while (ciphertext[i] != '\0') {
@@ -13,18 +12,15 @@ void calculateFrequency(char *ciphertext, int *frequency) {
     }
 }
 
-// Function to perform a basic letter frequency attack
 void letterFrequencyAttack(char *ciphertext, int topN) {
     int frequency[26] = {0}; // Initialize frequency array for 26 letters
     calculateFrequency(ciphertext, frequency);
 
-    // Create a copy of the frequency array to sort it later
     int sortedFrequency[26];
     for (int i = 0; i < 26; i++) {
         sortedFrequency[i] = frequency[i];
     }
 
-    // Sort the frequency array in descending order
     for (int i = 0; i < 26 - 1; i++) {
         for (int j = 0; j < 26 - i - 1; j++) {
             if (sortedFrequency[j] < sortedFrequency[j + 1]) {
@@ -35,7 +31,6 @@ void letterFrequencyAttack(char *ciphertext, int topN) {
         }
     }
 
-    // Guess the most likely substitutions based on frequency analysis
     printf("Top %d possible plaintexts:\n", topN);
     for (int n = 0; n < topN; n++) {
         printf("%d. ", n + 1);
